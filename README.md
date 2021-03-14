@@ -169,3 +169,60 @@ footer {
   place-items: <align-items> <justify-items>;
 }
 ```
+
+### items
+
+- grid-row-start, grid-row-end, grid-column-start, grid-column-end : 아이템을 칸 안에 배치하기 위해 시작 위치와 끝 위치를 지정. 숫자를 대충 지정해놓으면, 알아서 칸을 나눔. container에서 item이름 지어줬듯이 시맨틱하게 이름을 지어줄수도 있음
+
+```css
+.container {
+  display: grid;
+  grid-template-rows: [row-1st] 1fr [row-2nd] 1fr [row-3rd];
+  grid-template-columns: [col-1st] 1fr [col-2nd] 1fr [col-3rd] 1fr [col-4th];
+}
+.item:nth-child(1) {
+  grid-row-start: row-2nd;
+  grid-row-end: row-3rd;
+  grid-column-start: col-2nd;
+  grid-column-end: col-4th;
+}
+```
+
+- span 키워드 : span과 숫자를 조합하면 숫자만큼 라인을 확장하는 개념이 됨. start를 정해놓고 end를 span으로 하면 라인을 start부터 확장하는 느낌이 됨. 음수값으로 지정하고 싶다면 span 2 / -1 이런식으로도 가능
+
+```css
+.item:nth-child(1) {
+  /* Row 1번에서 3번(1+2=3)까지 => row 두줄을 먹음 */
+  grid-row-start: 1;
+  grid-row-end: span 2;
+
+  /* Column 2번에서 3번(2+1=3)까지 */
+  grid-column-start: 2;
+  /* grid-column-end: span 1; (생략) */
+}
+```
+
+- grid-row : row-start와 row-end의 단축 속성이고 각 속성을 /로 구분
+- grid-column: column-start와 column-end의 단축 속성이고 각 속성을 /로 구분
+- grid-area: 기본적으로는 row-start, column-start, row-end, column-end의 단축 속성인데 영역 이름을 설정할 경우 row column의 개념은 없어짐
+
+```css
+.item {
+  grid-area: <grid-row-start> / <grid-column-start> / <grid-row-end> /
+    <grid-column-end>;
+  grid-area: 영역이름;
+}
+
+.item {
+  grid-row: 2 / 3;
+  grid-column: span 2 / -1;
+}
+.item {
+  /* '시작 / 시작 / 끝 / 끝'임에 주의합시다! */
+  grid-area: 2 / span 2 / 3 / -1;
+}
+```
+
+- align-self : 단일 그리드 아이템을 수직 정렬. 그리드 아이템의 세로 너비가 자신이 속한 그리드 행의 크기보다 작아야함
+- justify-self : 단일 그리드 아이템을 수평 정렬. 그리드 아이템의 가로 너비가 자신이 속한 그리드 열의 크기보다 작아야함
+- Order: 그리드 아이템이 자동 배치되는 순서를 변경할 수 있음
