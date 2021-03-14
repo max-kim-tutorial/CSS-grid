@@ -1,0 +1,26 @@
+.flex-container {
+  display: flex;
+  width: 300px;
+}
+
+.flex-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+}
+
+.flex-item:nth-child(1) {
+  background-color: aquamarine;
+  flex: 3 4;
+}
+
+.flex-item:nth-child(2) {
+  background-color: burlywood;
+  flex: 2 5;
+}
+
+.flex-item:nth-child(3) {
+  background-color: thistle;
+  flex: 1 3;
+}
